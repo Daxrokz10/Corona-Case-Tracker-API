@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Corona API Tracker</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+
+    <header>
+
+    </header>
+
+    <main>
+        <div class="container mx-auto">
+            <div class="row text-center">
+                <h1>Total Corona Cases in India</h1>
+                <div id="total-counter" class="fs-1">
+
+                </div>
+            </div>
+        </div>
+
+        <section class="states mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mx-auto d-flex justify-content-center position-relative" style="width:500px; height:500px;">
+                        <img src="./assets/india-map.png" alt="" height="500px" usemap="#india-map" style="position:absolute; left:0; top:0; z-index:1;">
+                        <!-- Overlay divs for visual placement -->
+                        <!-- <div id="overlay-maharashtra" style="position:absolute; left:90px; top:270px; width:60px; height:60px; background:rgba(255,0,0,0.4); border:2px solid #c00; z-index:2; pointer-events:none;">Maharashtra</div>
+                        <div id="overlay-delhi" style="position:absolute; left:120px; top:140px; width:40px; height:40px; background:rgba(0,0,255,0.4); border:2px solid #00c; z-index:2; pointer-events:none;">Delhi</div>
+                        <div id="overlay-tamil-nadu" style="position:absolute; left:140px; top:400px; width:60px; height:60px; background:rgba(0,255,0,0.4); border:2px solid #0c0; z-index:2; pointer-events:none;">Tamil Nadu</div>
+                        <div id="overlay-kerala" style="position:absolute; left:100px; top:420px; width:40px; height:60px; background:rgba(255,255,0,0.4); border:2px solid #cc0; z-index:2; pointer-events:none;">Kerala</div>
+                        <div id="overlay-karnataka" style="position:absolute; left:90px; top:350px; width:50px; height:60px; background:rgba(0,255,255,0.4); border:2px solid #0cc; z-index:2; pointer-events:none;">Karnataka</div>
+                        <div id="overlay-andhra-pradesh" style="position:absolute; left:160px; top:360px; width:40px; height:60px; background:rgba(255,0,255,0.4); border:2px solid #c0c; z-index:2; pointer-events:none;">Andhra Pradesh</div>
+                        <div id="overlay-telangana" style="position:absolute; left:150px; top:320px; width:40px; height:40px; background:rgba(128,0,128,0.4); border:2px solid #808; z-index:2; pointer-events:none;">Telangana</div>
+                        <div id="overlay-goa" style="position:absolute; left:80px; top:360px; width:20px; height:20px; background:rgba(255,140,0,0.4); border:2px solid #fa0; z-index:2; pointer-events:none;">Goa</div>
+                        <div id="overlay-odisha" style="position:absolute; left:240px; top:280px; width:40px; height:60px; background:rgba(0,128,255,0.4); border:2px solid #08f; z-index:2; pointer-events:none;">Odisha</div>
+                        <div id="overlay-chhattisgarh" style="position:absolute; left:200px; top:250px; width:40px; height:60px; background:rgba(128,255,0,0.4); border:2px solid #8f0; z-index:2; pointer-events:none;">Chhattisgarh</div>
+                        <div id="overlay-madhya-pradesh" style="position:absolute; left:120px; top:220px; width:60px; height:60px; background:rgba(255,0,128,0.4); border:2px solid #f08; z-index:2; pointer-events:none;">Madhya Pradesh</div>
+                        <div id="overlay-puducherry" style="position:absolute; left:170px; top:470px; width:20px; height:20px; background:rgba(128,128,128,0.4); border:2px solid #888; z-index:2; pointer-events:none;">Puducherry</div>
+                        <div id="overlay-haryana" style="position:absolute; left:128px; top:128px; width:30px; height:30px; background:rgba(200,200,0,0.4); border:2px solid #cc0; z-index:2; pointer-events:none;">Haryana</div>
+                        <div id="overlay-chandigarh" style="position:absolute; left:140px; top:123px; width:15px; height:15px; background:rgba(128,255,255,0.4); border:2px solid #8ff; z-index:2; pointer-events:none;">Chandigarh</div>
+                        <div id="overlay-ladakh" style="position:absolute; left:120px; top:20px; width:30px; height:15px; background:rgba(200,200,255,0.4); border:2px solid #ccf; z-index:2; pointer-events:none;">Ladakh</div>
+                        <div id="overlay-lakshadweep" style="position:absolute; left:30px; top:480px; width:15px; height:15px; background:rgba(0,255,128,0.4); border:2px solid #0f8; z-index:2; pointer-events:none;">Lakshadweep</div>
+                        <div id="overlay-andaman-nicobar-islands" style="position:absolute; left:400px; top:480px; width:20px; height:15px; background:rgba(255,128,0,0.4); border:2px solid #f80; z-index:2; pointer-events:none;">Andaman & Nicobar Islands</div>
+                        <div id="overlay-dadra-nagar-haveli-daman-diu" style="position:absolute; left:60px; top:320px; width:20px; height:15px; background:rgba(128,0,255,0.4); border:2px solid #80f; z-index:2; pointer-events:none;">Dadra & Nagar Haveli and Daman & Diu</div>
+                        <div id="overlay-gujarat" style="position:absolute; left:60px; top:220px; width:50px; height:60px; background:rgba(0,128,0,0.4); border:2px solid #080; z-index:2; pointer-events:none;">Gujarat</div>
+                        <div id="overlay-rajasthan" style="position:absolute; left:60px; top:160px; width:60px; height:60px; background:rgba(255,215,0,0.4); border:2px solid #fd0; z-index:2; pointer-events:none;">Rajasthan</div>
+                        <div id="overlay-uttar-pradesh" style="position:absolute; left:180px; top:140px; width:60px; height:40px; background:rgba(0,0,128,0.4); border:2px solid #008; z-index:2; pointer-events:none;">Uttar Pradesh</div>
+                        <div id="overlay-bihar" style="position:absolute; left:250px; top:160px; width:40px; height:40px; background:rgba(128,0,0,0.4); border:2px solid #800; z-index:2; pointer-events:none;">Bihar</div>
+                        <div id="overlay-assam" style="position:absolute; left:370px; top:100px; width:40px; height:40px; background:rgba(128,128,0,0.4); border:2px solid #880; z-index:2; pointer-events:none;">Assam</div>
+                        <div id="overlay-west-bengal" style="position:absolute; left:300px; top:240px; width:40px; height:60px; background:rgba(0,128,128,0.4); border:2px solid #088; z-index:2; pointer-events:none;">West Bengal</div>
+                        <div id="overlay-punjab" style="position:absolute; left:100px; top:110px; width:40px; height:30px; background:rgba(255,0,128,0.4); border:2px solid #f08; z-index:2; pointer-events:none;">Punjab</div> -->
+                        <map name="india-map">
+                            <!-- Updated clickable areas for the states -->
+                            <area shape="poly" coords="100,290,120,310,140,300,130,280" href="#" data-state="Maharashtra">
+                            <area shape="poly" coords="120,150,140,170,160,160,150,140" href="#" data-state="Delhi">
+                            <area shape="poly" coords="150,420,170,440,190,430,180,410" href="#" data-state="Tamil Nadu">
+                            <area shape="poly" coords="110,430,130,470,140,470,140,430" href="#" data-state="Kerala">
+                            <area shape="poly" coords="100,360,120,400,140,390,130,350" href="#" data-state="Karnataka">
+                            <area shape="poly" coords="170,370,190,410,200,400,190,360" href="#" data-state="Andhra Pradesh">
+                            <area shape="poly" coords="160,330,180,350,190,340,170,320" href="#" data-state="Telangana">
+                            <area shape="poly" coords="90,370,100,380,110,380,100,370" href="#" data-state="Goa">
+                            <area shape="poly" coords="250,290,270,330,280,320,270,280" href="#" data-state="Odisha">
+                            <area shape="poly" coords="210,260,230,300,240,290,230,250" href="#" data-state="Chhattisgarh">
+                            <area shape="poly" coords="130,230,150,270,170,260,160,220" href="#" data-state="Madhya Pradesh">
+                            <area shape="poly" coords="180,480,190,490,200,490,190,480" href="#" data-state="Puducherry">
+                            <area shape="poly" coords="180,100,190,120,200,110,190,90" href="#" data-state="Uttarakhand">
+                            <area shape="poly" coords="140,140,150,160,160,150,150,130" href="#" data-state="Haryana">
+                            <area shape="poly" coords="150,100,160,120,170,110,160,90" href="#" data-state="Himachal Pradesh">
+                            <area shape="poly" coords="145,125,150,135,155,130,150,120" href="#" data-state="Chandigarh">
+                            <area shape="poly" coords="110,50,130,70,150,60,130,40" href="#" data-state="Jammu & Kashmir">
+                            <area shape="poly" coords="370,210,390,230,400,220,390,200" href="#" data-state="Tripura">
+                            <area shape="poly" coords="360,180,370,200,380,190,370,170" href="#" data-state="Meghalaya">
+                            <area shape="poly" coords="410,190,420,210,430,200,420,180" href="#" data-state="Manipur">
+                            <area shape="poly" coords="430,170,440,190,450,180,440,160" href="#" data-state="Nagaland">
+                            <area shape="poly" coords="420,230,430,250,440,240,430,220" href="#" data-state="Mizoram">
+                            <area shape="poly" coords="450,110,460,140,470,130,460,100" href="#" data-state="Arunachal Pradesh">
+                            <area shape="poly" coords="280,90,290,110,300,100,290,80" href="#" data-state="Sikkim">
+                            <area shape="poly" coords="155,85,160,95,165,90,160,80" href="#" data-state="Chandigarh">
+                            <area shape="poly" coords="110,20,130,40,150,30,130,10" href="#" data-state="Jammu & Kashmir">
+                            <area shape="poly" coords="138,138,148,158,158,148,148,128" href="#" data-state="Haryana">
+                            <area shape="poly" coords="145,128,150,138,155,133,150,123" href="#" data-state="Chandigarh">
+                            <area shape="poly" coords="130,30,140,40,150,35,140,25" href="#" data-state="Ladakh">
+                            <area shape="poly" coords="35,485,45,495,50,490,40,480" href="#" data-state="Lakshadweep">
+                            <area shape="poly" coords="410,485,420,495,425,490,415,480" href="#" data-state="Andaman & Nicobar Islands">
+                            <area shape="poly" coords="65,325,75,335,80,330,70,320" href="#" data-state="Dadra & Nagar Haveli and Daman & Diu">
+                            <area shape="poly" coords="70,230,90,270,110,260,90,220" href="#" data-state="Gujarat">
+                            <area shape="poly" coords="70,130,90,170,110,160,90,120" href="#" data-state="Rajasthan">
+                            <area shape="poly" coords="190,150,210,170,230,160,210,140" href="#" data-state="Uttar Pradesh">
+                            <area shape="poly" coords="260,180,280,200,290,190,270,170" href="#" data-state="Bihar">
+                            <area shape="poly" coords="380,110,400,150,410,140,390,100" href="#" data-state="Assam">
+                            <area shape="poly" coords="310,250,330,290,350,280,330,240" href="#" data-state="West Bengal">
+                            <area shape="poly" coords="280,90,290,110,300,100,290,80" href="#" data-state="Sikkim">
+                            <area shape="poly" coords="360,180,370,200,380,190,370,170" href="#" data-state="Meghalaya">
+                            <area shape="poly" coords="370,210,390,230,400,220,390,200" href="#" data-state="Tripura">
+                            <area shape="poly" coords="410,190,420,210,430,200,420,180" href="#" data-state="Manipur">
+                            <area shape="poly" coords="430,170,440,190,450,180,440,160" href="#" data-state="Nagaland">
+                            <area shape="poly" coords="420,230,430,250,440,240,430,220" href="#" data-state="Mizoram">
+                            <area shape="poly" coords="450,110,460,140,470,130,460,100" href="#" data-state="Arunachal Pradesh">
+                        </map>
+                        <div id="state-tooltip" class="bg-dark text-white p-2 rounded position-absolute" style="display:none; min-width:180px; pointer-events:none; z-index:10;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="deaths-discharged">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <h2>Deaths</h2>
+                        <div id="deaths" class="fs-2"></div>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h2>Discharged</h2>
+                        <div id="discharged" class="fs-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>
